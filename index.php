@@ -11,18 +11,21 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-            $name = 'Jim';
-            $what = 'geek';
-            $level = 10;
-            echo 'Hi, my name is '.$name,'. and i am a level'.$level.' '.$what;
-            
-            echo '<br />';
-            
-            $hoursworked = 10; 
-            $rate = 12; 
-            $total = $hoursworked * $rate;
-            echo 'You owe me'.$total;
+        $name = 'Jim';
+        $what = 'geek';
+        $level = 10;
+        echo 'Hi, my name is ' . $name, '. and i am a level' . $level . ' ' . $what;
 
+        echo '<br />';
+
+        $hoursworked = 14;
+        $rate = 10;
+        if ($hoursworked > 40) {
+            $total = $hoursworked * $rate * 1.5;
+        } else {
+            $total = $hoursworked * $rate;
+        }
+        echo ($total > 0) ? 'You owe me ' . $total : "You're welcome";
         ?>
     </body>
 </html>
