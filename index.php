@@ -12,14 +12,18 @@ and open the template in the editor.
     <body>
         <?php
 
+        //tic tac toe class
         class Game {
 
+            //the 9 slots
             var $position;
 
+            //assign slots
             function __construct($squares) {
                 $this->position = str_split($squares);
             }
 
+            //draws the 9 spots from url input
             function display() {
                 echo '<table cols="3" style = "font-size: large; font-weight:bold">';
                 echo '<tr>';
@@ -33,6 +37,17 @@ and open the template in the editor.
                 echo '</table>';
             }
 
+            //assign the next available spot to x
+            function pick_move() {
+                for($i = 0; $i < 9; $i++) {
+                    if($this->position[$i] == '-') {
+                        $this->position[$i] = 'x';
+                        break;
+                    }
+                }
+            }
+            
+            //draw the spot, if empty draw a link that assigns a new url
             function show_cell($which) {
                 $token = $this->position[$which];
 		if($token <> '-') {
@@ -45,26 +60,29 @@ and open the template in the editor.
 		return '<td><a href="'.$link.'">-</a></td>';
             }
 
+            //check if any users have won
             function winner($token) {
                 $result = false;
                 for ($row = 0; $row < 3; $row++) {
                     $result = true;
                     for ($col = 0; $col < 3; $col++) {
-                        if ($this->position[3 * $row + $col] != $token) {
+                        if ($this->position[(3 * $row) + $col] != $token) {
                             $result = false;
-                        } else {
-                            return $result;
                         }
+                    }
+                    if($result == true) {
+                        return $result;
                     }
                 }
                 for ($column = 0; $column < 3; $column++) {
                     $result = true;
                     for ($row = 0; $row < 3; $row++) {
-                        if ($this->position[$column + 3 * $row] != $token) {
+                        if ($this->position[$column + (3 * $row)] != $token) {
                             $result = false;
-                        } else {
-                            return $result;
                         }
+                    }
+                    if($result == true) {
+                        return $result;
                     }
                 }
                 if ($this->position[0] == $token && $this->position[4] == $token && $this->position[8] == $token) {
@@ -80,7 +98,9 @@ and open the template in the editor.
         $squares = $_GET['board'];
         $game = new Game($squares);
 
+        $game->pick_move(); 
         $game->display();
+        
         if ($game->winner('x')) {
             echo 'You win, lucky guesses';
         } else if ($game->winner('o')) {
@@ -88,6 +108,7 @@ and open the template in the editor.
         } else {
             echo 'No winners yet, but you are losing';
         }
+        
         ?>
     </body>
 </html>
