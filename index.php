@@ -11,7 +11,16 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        echo 'hi there';
+          $temp = 'Jim';
+           echo 'Hi, my name is';
+           echo $temp;
+           $temp = 'geek';
+           echo "I am a";
+           echo $temp;
+           $temp = 10;
+           echo 'My level is';
+           echo $temp;
+           echo 'hi there';
         ?>
     </body>
 </html>
